@@ -321,7 +321,7 @@ footer {
 /* Media Queries  */
 @media (min-width: 900px) {
   .container {
-    gap: 150px;
+    gap: 100px;
     align-items: center;
     margin: 30px 0;
   }
@@ -365,6 +365,7 @@ footer {
   }
   .body-section {
     gap: 170px;
+    margin-top: 10px;
   }
   .other-btns {
     align-self: flex-end;
@@ -380,7 +381,7 @@ footer {
   }
 
   .rps-btns {
-    transform: scale(1.5);
+    transform: scale(1.2);
     width: 490px;
     gap: 100px;
   }
