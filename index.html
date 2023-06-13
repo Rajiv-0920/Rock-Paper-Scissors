@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <div class="logo">
+          <img src="./images/logo.svg" alt="Rock Paper Scissors Logo" />
+        </div>
+        <div class="your-score">
+          <p class="score-title">Your score</p>
+          <p class="score user-scores">0</p>
+        </div>
+        <div class="house-score">
+          <p class="score-title">The House score</p>
+          <p class="score house-scores">0</p>
+        </div>
+      </header>
+      <div class="body-section">
+        <section class="game-body">
+          <section class="rps-btns">
+            <button class="paper btn" data-choice="paper">
+              <img src="./images/icon-paper.svg" alt="Paper" />
+            </button>
+            <button class="scissors btn" data-choice="scissors">
+              <img src="./images/icon-scissors.svg" alt="scissors" />
+            </button>
+            <button class="rock btn" data-choice="rock">
+              <img src="./images/icon-rock.svg" alt="Rock" />
+            </button>
+          </section>
+        </section>
+        <section class="result">
+          <!-- <div class="your-picked">
+            <button class="btn paper">
+              <img src="./images/icon-paper.svg" alt="Paper" />
+            </button>
+            <p>You Picked</p>
+          </div>
+          <section class="rematch show">
+            <strong class="title">You win</strong>
+            <button class="play-again">Play Again</button>
+            <button class="btn reset">Reset</button>
+          </section>
+          <div class="house-picked">
+            <button class="btn rock ">
+              <img src="./images/icon-rock.svg" alt="Paper" />
+            </button>
+            <p>The House Picked</p>
+          </div> -->
+        </section>
+      </div>
+      <section class="other-btns">
+        <button class="btn level">Advanced</button>
+        <button class="btn rule">Rules</button>
+        <div class="rules">
+          <button class="exit">
+            <img src="./images/icon-close.svg" alt="" />
+          </button>
+          <img src="./images/image-rules.svg" alt="rules image" />
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="https://github.com/Rajiv-0920">Rajiv Kumar</a>.
+      </div>
+    </footer>
+  </body>
+</html>

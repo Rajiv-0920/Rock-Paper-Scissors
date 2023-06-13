@@ -1,0 +1,389 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
+:root {
+  /* ### Primary */
+
+  --scissors1: hsl(39, 89%, 49%);
+  --scissors2: hsl(40, 84%, 53%);
+  --Paper: #4865f4;
+  --paper1: #5671f5;
+  --Rock1: hsl(349, 71%, 52%);
+  --rock2: hsl(349, 70%, 56%);
+  --LizardGradient: hsl(261, 73%, 60%) to hsl(261, 72%, 63%);
+  --Cyan: hsl(189, 59%, 53%) to hsl(189, 58%, 57%);
+
+  /* ### Neutral */
+
+  --DarkText: hsl(229, 25%, 31%);
+  --ScoreText: hsl(229, 64%, 46%);
+  --HeaderOutline: hsl(217, 16%, 45%);
+  --white: #fff;
+
+  /* ### Background */
+
+  --RadialGradient: hsl(214, 47%, 23%) to hsl(237, 49%, 15%);
+
+  --barlow-font: "Barlow Semi Condensed", sans-serif;
+}
+
+/* Basic CSS */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, #1f3756, #141539);
+  font-size: 1.6rem;
+  font-family: var(--barlow-font);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.container {
+  width: 90%;
+  min-height: 600px;
+  margin: 13px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+.body-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.result > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  text-align: center;
+  width: 110px;
+}
+.rematch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.rematch strong.title {
+  font-size: 5rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+.rematch button.play-again,
+.rematch button.reset {
+  padding: 10px 35px;
+  border: none;
+  width: 150px;
+  border-radius: 5px;
+  color: #141539;
+  border: 2px solid transparent;
+  transition: 0.3s;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.rematch button.play-again:hover,
+.rematch button.reset:hover {
+  color: var(--rock2);
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+.header {
+  display: flex;
+  border: 2px solid var(--HeaderOutline);
+  padding: 10px;
+  gap: 10px;
+  border-radius: 5px;
+}
+.your-score,
+.house-score {
+  background-color: var(--white);
+  padding: 5px;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.score {
+  font-size: 2.6rem;
+  color: var(--DarkText);
+}
+.score-title {
+  font-size: 1rem;
+  color: var(--ScoreText);
+}
+.logo {
+  width: 90px;
+  margin-right: auto;
+}
+.other-btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.other-btns > .btn {
+  padding: 8px 15px;
+  border: 2px solid var(--HeaderOutline);
+  color: var(--white);
+  letter-spacing: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: color 0.5s, background 0.5s;
+}
+.other-btns > .btn:hover {
+  background-color: #fff;
+  color: #141539;
+  border: 2px solid transparent;
+}
+.result div > .btn.winner::after {
+  content: "";
+  left: 0%;
+  z-index: -3;
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  animation: shadow 1s ease infinite;
+}
+@keyframes shadow {
+  0% {
+    border-radius: 50%;
+    box-shadow: 0px 0px 0 40px #14153908;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0 40px #1415398e, 0px 0px 0 70px #14153955,
+      0px 0px 0 100px #14153948;
+  }
+  100% {
+    border-radius: 50%;
+    box-shadow: 0px 0px 0 40px #14153900, 0px 0px 0 70px #14153900,
+      0px 0px 0 100px #14153900;
+    opacity: 0;
+  }
+}
+/* CSS for Rock Paper Scissors Btns */
+.game-body {
+  background-image: url("./images/bg-triangle.svg");
+  background-position: center;
+  background-size: 70% 80%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+}
+.rps-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 80px;
+  width: 300px;
+}
+.rps-btns > button.btn,
+.result div > button.btn {
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  height: 100px;
+  width: 100px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: inset 0px 5px lightgray;
+}
+
+.rps-btns > button.btn::before,
+.result div > button.btn::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  border-radius: 50%;
+  z-index: -1;
+}
+.rps-btns > button.btn.active::after {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: -30px;
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
+  background-color: #14153973;
+  z-index: -2;
+}
+.rps-btns > button.rock::before,
+.result div > button.rock::before {
+  background: linear-gradient(to top, var(--Rock1), var(--rock2));
+  box-shadow: 0 3px 0 3px hsl(349, 67%, 37%);
+}
+.rps-btns > button.paper::before,
+.result div > button.paper::before {
+  box-shadow: 0 3px 0 3px #344bbd;
+  background: linear-gradient(to top, var(--Paper), var(--paper1));
+}
+.rps-btns > button.scissors::before,
+.result div > button.scissors::before {
+  box-shadow: 0 3px 0 3px hsl(39, 88%, 36%);
+  background: linear-gradient(to top, var(--scissors1), var(--scissors2));
+}
+
+/* Game Body Hide */
+.game-body.hide {
+  display: none;
+}
+.result {
+  display: none;
+}
+/* Result Show  */
+.result.show {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.rematch {
+  order: 3;
+  opacity: 0;
+  visibility: hidden;
+  transition: 1s;
+}
+.rematch.show {
+  opacity: 1;
+  visibility: visible;
+  z-index: 5;
+}
+.rules {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: scale(0.5);
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  height: 300px;
+  width: 300px;
+  box-shadow: 0 0 10px 0 #141539;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.rules.show {
+  opacity: 1;
+  visibility: visible;
+}
+.rules :first-child {
+  align-self: flex-end;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+}
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.attribution a {
+  color: #4362ff;
+}
+/* Media Queries  */
+@media (min-width: 900px) {
+  .container {
+    gap: 150px;
+    align-items: center;
+    margin: 30px 0;
+  }
+  .header {
+    width: 500px;
+    z-index: 3;
+    padding: 20px;
+  }
+  html {
+    font-size: 75%;
+  }
+  .result.show {
+    gap: 150px;
+  }
+  .result.show p {
+    font-size: 1rem;
+    order: 1;
+  }
+  .result.show button.btn {
+    order: 2;
+  }
+  .result > div {
+    transform: scale(1.7);
+  }
+
+  .rematch button.play-again,
+  .rematch button.reset {
+    font-size: 1.4rem;
+    width: 180px;
+  }
+  .score {
+    font-size: 2.8rem;
+    color: var(--DarkText);
+  }
+  .score-title {
+    font-size: 1.2rem;
+    color: var(--ScoreText);
+  }
+  .house-picked {
+    order: 3;
+  }
+  .body-section {
+    gap: 170px;
+  }
+  .other-btns {
+    align-self: flex-end;
+    z-index: 5;
+  }
+  .logo {
+    width: 120px;
+    margin-right: auto;
+  }
+  .your-score,
+  .house-score {
+    padding: 10px;
+  }
+
+  .rps-btns {
+    transform: scale(1.5);
+    width: 490px;
+    gap: 100px;
+  }
+  .rules.show {
+    width: 400px;
+    height: 400px;
+  }
+}
