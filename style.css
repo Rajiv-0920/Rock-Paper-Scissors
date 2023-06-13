@@ -293,6 +293,7 @@ img {
 .rules.show {
   opacity: 1;
   visibility: visible;
+  z-index: 999;
 }
 .rules :first-child {
   align-self: flex-end;
