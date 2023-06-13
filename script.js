@@ -6,23 +6,14 @@ const advancedMode = document.querySelector(".advanced-mode");
 const normalMode = document.querySelector(".game-body");
 const advancedLogo = document.querySelector(".advanced");
 const normalLogo = document.querySelector(".normal");
-
-level.addEventListener("click", () => {
-  advancedMode.classList.toggle("show");
-  normalMode.classList.toggle("hide");
-  advancedLogo.classList.toggle("show");
-  normalLogo.classList.toggle("hide");
-  level.innerText === "Advanced"
-    ? (level.innerText = "Normal")
-    : (level.innerText = "Advanced");
-});
+const userScore = document.querySelector(`.user-scores`);
+const houseScore = document.querySelector(`.house-scores`);
+let userScoreCount = 0;
+let houseScoreCount = 0;
 
 const rpsBtns = document.querySelectorAll(".rps-btns button");
 const rpsChoiceBtns = document.querySelectorAll(".game-body");
 const result = document.querySelector(".result");
-
-let userScoreCount = 0;
-let houseScoreCount = 0;
 
 rpsBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -36,7 +27,7 @@ rpsBtns.forEach((btn) => {
       btn.classList.add("active");
       const userChoice = btn.dataset.choice;
       let computerChoice = "";
-      const rps = ["rock", "paper", "scissors"];
+      const rps = ["paper", "rock", "scissors"];
       const randomNum = Math.floor(Math.random() * rps.length);
       computerChoice = rps[randomNum];
       rpsChoiceBtns[0].classList.add("hide");
@@ -64,9 +55,6 @@ rpsBtns.forEach((btn) => {
       const userChoiceBtn = document.querySelector(`.your-picked .btn`);
       const housePickedShow = document.querySelector(`.house-picked`);
       const rematch = document.querySelector(`.rematch`);
-
-      const userScore = document.querySelector(`.user-scores`);
-      const houseScore = document.querySelector(`.house-scores`);
 
       setTimeout(() => {
         housePickedShow.innerHTML = `<button class="btn ${computerChoice} ">
@@ -121,7 +109,7 @@ rpsBtns.forEach((btn) => {
       btn.classList.add("active");
       const userChoice = btn.dataset.choice;
       let computerChoice = "";
-      const rps = ["rock", "paper", "scissors", "spock", "lizard"];
+      const rps = ["rock", "scissors", "paper", "lizard", "spock"];
       const randomNum = Math.floor(Math.random() * rps.length);
       computerChoice = rps[randomNum];
 
@@ -151,8 +139,6 @@ rpsBtns.forEach((btn) => {
       const userChoiceBtn = document.querySelector(`.your-picked .btn`);
       const housePickedShow = document.querySelector(`.house-picked`);
       const rematch = document.querySelector(`.rematch`);
-      const userScore = document.querySelector(`.user-scores`);
-      const houseScore = document.querySelector(`.house-scores`);
       const rule = document.querySelector(`p.rule`);
 
       setTimeout(() => {
@@ -265,7 +251,6 @@ const exit = document.querySelector(".exit");
 const normalRules = document.querySelector(".normal-rules-img");
 const advancedRules = document.querySelector(".advanced-rules-img");
 
-console.log(normalRules, advancedRules);
 rulesBtn.addEventListener("click", () => {
   showRules.classList.toggle("show");
   if (level.innerText === "Advanced") {
@@ -278,4 +263,18 @@ rulesBtn.addEventListener("click", () => {
   exit.addEventListener("click", () => {
     showRules.classList.remove("show");
   });
+});
+
+level.addEventListener("click", () => {
+  advancedMode.classList.toggle("show");
+  normalMode.classList.toggle("hide");
+  advancedLogo.classList.toggle("show");
+  normalLogo.classList.toggle("hide");
+  userScoreCount = 0;
+  houseScoreCount = 0;
+  userScore.innerText = userScoreCount;
+  houseScore.innerText = houseScoreCount;
+  level.innerText === "Advanced"
+    ? (level.innerText = "Normal")
+    : (level.innerText = "Advanced");
 });
