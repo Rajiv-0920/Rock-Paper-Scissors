@@ -8,8 +8,10 @@
   --paper1: #5671f5;
   --Rock1: hsl(349, 71%, 52%);
   --rock2: hsl(349, 70%, 56%);
-  --LizardGradient: hsl(261, 73%, 60%) to hsl(261, 72%, 63%);
-  --Cyan: hsl(189, 59%, 53%) to hsl(189, 58%, 57%);
+  --Lizard: hsl(261, 73%, 60%);
+  --Lizard1: hsl(261, 72%, 63%);
+  --spock: hsl(189, 59%, 53%);
+  --spock1: hsl(189, 58%, 57%);
 
   /* ### Neutral */
 
@@ -48,17 +50,36 @@ body {
 .container {
   width: 90%;
   min-height: 600px;
-  margin: 13px 0;
+  margin: 40px 0;
   display: flex;
   flex-direction: column;
-  gap: 70px;
 }
-.body-section {
+.normal-mode,
+.advanced-mode {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
-.result > div {
+.normal-mode.hide {
+  display: none;
+}
+.advanced-mode {
+  display: none;
+}
+.advanced-mode.show {
+  display: flex;
+}
+.normal,
+.advanced.show {
+  display: block;
+}
+.normal.hide,
+.advanced {
+  display: none;
+}
+
+.result > div,
+.advanced-result > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -134,6 +155,7 @@ img {
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: auto;
 }
 .other-btns > .btn {
   padding: 8px 15px;
@@ -150,7 +172,8 @@ img {
   color: #141539;
   border: 2px solid transparent;
 }
-.result div > .btn.winner::after {
+.result div > .btn.winner::after,
+.advanced-result div > .btn.winner::after {
   content: "";
   left: 0%;
   z-index: -3;
@@ -188,6 +211,9 @@ img {
   display: flex;
   justify-content: center;
 }
+.normal-mode .game-body {
+  margin-top: 70px;
+}
 .rps-btns {
   display: flex;
   flex-wrap: wrap;
@@ -196,7 +222,8 @@ img {
   width: 300px;
 }
 .rps-btns > button.btn,
-.result div > button.btn {
+.result div > button.btn,
+.advanced-result div > button.btn {
   padding: 10px;
   border-radius: 50%;
   border: none;
@@ -211,7 +238,8 @@ img {
 }
 
 .rps-btns > button.btn::before,
-.result div > button.btn::before {
+.result div > button.btn::before,
+.advanced-result div > button.btn > ::before {
   content: "";
   position: absolute;
   top: -15px;
@@ -233,34 +261,100 @@ img {
   z-index: -2;
 }
 .rps-btns > button.rock::before,
-.result div > button.rock::before {
+.result div > button.rock::before,
+.advanced-result div > button.rock::before {
   background: linear-gradient(to top, var(--Rock1), var(--rock2));
   box-shadow: 0 3px 0 3px hsl(349, 67%, 37%);
 }
 .rps-btns > button.paper::before,
-.result div > button.paper::before {
+.result div > button.paper::before,
+.advanced-result div > button.paper::before {
   box-shadow: 0 3px 0 3px #344bbd;
   background: linear-gradient(to top, var(--Paper), var(--paper1));
 }
 .rps-btns > button.scissors::before,
-.result div > button.scissors::before {
+.result div > button.scissors::before,
+.advanced-result div > button.scissors::before {
   box-shadow: 0 3px 0 3px hsl(39, 88%, 36%);
   background: linear-gradient(to top, var(--scissors1), var(--scissors2));
 }
-
+.rps-btns > button.lizard::before,
+.result div > button.lizard::before,
+.advanced-result div > button.lizard::before {
+  box-shadow: 0 3px 0 3px hsl(261, 65%, 45%);
+  background: linear-gradient(to top, var(--Lizard), var(--Lizard1));
+}
+.rps-btns > button.spock::before,
+.result div > button.spock::before,
+.advanced-result div > button.spock::before {
+  box-shadow: 0 3px 0 3px hsl(189, 60%, 40%);
+  background: linear-gradient(to top, var(--spock), var(--spock1));
+}
+.advanced-mode .rps-btns {
+  transform: scale(0.9);
+  grid-template-columns: repeat(2, 1fr);
+}
+.advanced-mode .rps-btns :nth-child(1) {
+  top: 5%;
+  left: 30%;
+}
+.advanced-mode .rps-btns :nth-child(2) {
+  top: 30%;
+  left: 10%;
+}
+.advanced-mode .rps-btns :nth-child(3) {
+  top: -10%;
+  left: -10%;
+}
+.advanced-mode .rps-btns :nth-child(4) {
+  top: 33%;
+  left: 0;
+}
+.advanced-mode .rps-btns :nth-child(5) {
+  top: -6%;
+  left: -25%;
+}
+.advanced-mode .game-body {
+  background-image: url("./images/bg-pentagon.svg");
+  background-position: center;
+  background-size: 70%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 /* Game Body Hide */
 .game-body.hide {
   display: none;
 }
-.result {
+.result,
+.advanced-result {
   display: none;
 }
 /* Result Show  */
-.result.show {
+.result.show,
+.advanced-result.show {
   display: flex;
   gap: 50px;
   justify-content: center;
+  margin: 100px 0 40px;
   flex-wrap: wrap;
+}
+img.normal-mode-hide,
+img.advanced-rules-img {
+  display: none;
+}
+img.advanced-rules-img.show {
+  display: block;
+}
+p.rule {
+  font-size: 1.6rem;
+  color: #2a7fff !important;
+  letter-spacing: 1px;
+}
+p.rule.loses {
+  color: #df4646 !important;
 }
 .rematch {
   order: 3;
@@ -273,6 +367,9 @@ img {
   visibility: visible;
   z-index: 5;
 }
+.level.hide {
+  display: none;
+}
 .rules {
   opacity: 0;
   visibility: hidden;
@@ -284,7 +381,7 @@ img {
   background-color: var(--white);
   padding: 20px;
   border-radius: 10px;
-  height: 300px;
+  height: 350px;
   width: 300px;
   box-shadow: 0 0 10px 0 #141539;
   transition: 0.3s;
@@ -321,7 +418,6 @@ footer {
 /* Media Queries  */
 @media (min-width: 900px) {
   .container {
-    gap: 100px;
     align-items: center;
     margin: 30px 0;
   }
@@ -333,13 +429,15 @@ footer {
   html {
     font-size: 75%;
   }
-  .result.show {
+  .result.show,
+  .advanced-result.show {
     gap: 150px;
   }
-  .result.show p {
+  /* .result.show p,
+  .advanced-result.show p {
     font-size: 1rem;
     order: 1;
-  }
+  } */
   .result.show button.btn {
     order: 2;
   }
@@ -363,9 +461,9 @@ footer {
   .house-picked {
     order: 3;
   }
-  .body-section {
+  .normal-mode {
     gap: 170px;
-    margin-top: 10px;
+    margin-top: 30px;
   }
   .other-btns {
     align-self: flex-end;
@@ -388,5 +486,18 @@ footer {
   .rules.show {
     width: 400px;
     height: 400px;
+  }
+  .advanced-mode .rps-btns :nth-child(1) {
+    top: 4%;
+    left: 22%;
+  }
+  .advanced-mode .rps-btns :nth-child(5) {
+    top: -7%;
+    left: -23%;
+  }
+  p.rule {
+    font-size: 1.8rem !important;
+    color: #fff;
+    letter-spacing: 1px;
   }
 }
