@@ -57,7 +57,7 @@ rpsBtns.forEach((btn) => {
         <div class="house-picked">
             <button class="btn">
             </button>
-           <p>The House Picked</p>
+           <p>The House is Picking</p>
         </div>
     `;
       const winCaption = document.querySelector(".title");
@@ -144,7 +144,7 @@ rpsBtns.forEach((btn) => {
         <div class="house-picked">
             <button class="btn">
             </button>
-           <p>The House Picked</p>
+           <p>The House is Picking</p>
         </div>
     `;
       const winCaption = document.querySelector(".title");
