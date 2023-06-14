@@ -147,70 +147,55 @@ rpsBtns.forEach((btn) => {
            
             </button> <p>The House Picked</p>`;
         const houseChoiceBtn = document.querySelector(`.house-picked .btn`);
-        const rules = {
-          rock: { beats: ["lizard", "scissors"], losesTo: ["paper", "spock"] },
-          lizard: { beats: ["spock", "paper"], losesTo: ["rock", "scissors"] },
-          spock: { beats: ["scissors", "rock"], losesTo: ["lizard", "paper"] },
-          scissors: { beats: ["paper", "lizard"], losesTo: ["spock", "rock"] },
-          paper: { beats: ["rock", "spock"], losesTo: ["scissors", "lizard"] },
+
+        // Create an object that maps each choice to an array of choices that it beats
+        const beatsTo = {
+          lizard: ["spock", "paper"],
+          spock: ["rock", "scissors"],
+          paper: ["spock", "rock"],
+          rock: ["lizard", "scissors"],
+          scissors: ["lizard", "paper"],
         };
+
+        // Create an object that maps each pair of choices to the rule that explains the outcome
+        const rulesDescribe = {
+          "lizard-spock": "Lizard poisons Spock",
+          "lizard-paper": "Lizard eats Paper",
+          "spock-rock": "Spock vaporizes Rock",
+          "scissors-lizard": "Scissors decapitates Lizard",
+          "rock-lizard": "Rock crushes Lizard",
+          "paper-spock": "Paper disproves Spock",
+          "paper-rock": "Paper covers Rock",
+          "rock-scissors": "Rock crushes Scissors",
+          "scissors-paper": "Scissors cuts Paper",
+          "spock-scissors": "Spock smashes Scissors",
+        };
+
         if (userChoice === computerChoice) {
           winCaption.innerText = `It's a tie!`;
           userChoiceBtn.classList.add("winner");
           houseChoiceBtn.classList.add("winner");
-        } else if (rules[userChoice].beats.includes(computerChoice)) {
+        } else if (beatsTo[userChoice].includes(computerChoice)) {
           winCaption.innerText = `You Win!`;
           userScoreCount++;
           userChoiceBtn.classList.add("winner");
           userScore.innerText = userScoreCount;
           rule.classList.remove("loses");
-          if (userChoice === "lizard" && computerChoice === "spock") {
-            rule.innerText = `Lizard poisons Spock`;
-          } else if (userChoice === "lizard" && computerChoice === "paper") {
-            rule.innerText = `Lizard eats Paper`;
-          } else if (userChoice === "spock" && computerChoice === "rock") {
-            rule.innerText = `Spock vaporizes Rock`;
-          } else if (userChoice === "scissors" && computerChoice === "lizard") {
-            rule.innerText = `Scissors decapitates Lizard`;
-          } else if (userChoice === "rock" && computerChoice === "lizard") {
-            rule.innerText = `Rock crushes Lizard`;
-          } else if (userChoice === "paper" && computerChoice === "spock") {
-            rule.innerText = `Paper disproves Spock`;
-          } else if (userChoice === "paper" && computerChoice === "rock") {
-            rule.innerText = `Paper covers Rock`;
-          } else if (userChoice === "rock" && computerChoice === "scissors") {
-            rule.innerText = `Rock crushes Scissors`;
-          } else if (userChoice === "scissors" && computerChoice === "paper") {
-            rule.innerText = `Scissors cuts Paper`;
-          } else if (userChoice === "spock" && computerChoice === "scissors") {
-            rule.innerText = `Spock smashes Scissors`;
+
+          if (beatsTo[userChoice].includes(computerChoice)) {
+            // Use the rules object to get the rule that explains the outcome
+            rule.innerText = rulesDescribe[userChoice + "-" + computerChoice];
           }
-        } else if (!rules[userChoice].beats.includes(computerChoice)) {
+        } else if (beatsTo[computerChoice].includes(userChoice)) {
           winCaption.innerText = `You Lose!`;
           houseScoreCount++;
           houseChoiceBtn.classList.add("winner");
           rule.classList.add("loses");
           houseScore.innerText = houseScoreCount;
-          if (userChoice === "lizard" && computerChoice === "scissors") {
-            rule.innerText = `Scissors decapitates Lizard`;
-          } else if (userChoice === "lizard" && computerChoice === "rock") {
-            rule.innerText = `Rock crushes Lizard`;
-          } else if (userChoice === "spock" && computerChoice === "lizard") {
-            rule.innerText = `Lizard poisons Spock`;
-          } else if (userChoice === "spock" && computerChoice === "paper") {
-            rule.innerText = `Paper disproves Spock`;
-          } else if (userChoice === "paper" && computerChoice === "lizard") {
-            rule.innerText = `Lizard eats Paper`;
-          } else if (userChoice === "rock" && computerChoice === "spock") {
-            rule.innerText = `Spock vaporizes Rock`;
-          } else if (userChoice === "rock" && computerChoice === "paper") {
-            rule.innerText = `Paper covers Rock`;
-          } else if (userChoice === "scissors" && computerChoice === "rock") {
-            rule.innerText = `Rock crushes Scissors`;
-          } else if (userChoice === "paper" && computerChoice === "scissors") {
-            rule.innerText = `Scissors cuts Paper`;
-          } else if (userChoice === "scissors" && computerChoice === "spock") {
-            rule.innerText = `Spock smashes Scissors`;
+          // Use the beats object to check if the userChoice wins over the computerChoice
+          if (beatsTo[computerChoice].includes(userChoice)) {
+            // Use the rules object to get the rule that explains the outcome
+            rule.innerText = rulesDescribe[computerChoice + "-" + userChoice];
           }
         }
 
